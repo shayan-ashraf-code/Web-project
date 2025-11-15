@@ -1,24 +1,72 @@
 // --- 1. Header Component ---
 function Header(props) {
+    // NEW: Add state to track if the mobile menu is open
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+
     // Determine if a link is active based on currentPage state
     const isActive = (pageName) => props.currentPage === pageName ? 'active' : '';
+
+    // NEW: Wrapper function to close menu when a link is clicked
+    const handleLinkClick = (page) => {
+        props.setPage(page);
+        setIsMobileMenuOpen(false); // Close menu on navigation
+    };
 
     return (
         <header className="header">
             <div className="header-container">
                 <div className="logo">
-                    <a href="#" onClick={() => props.setPage('home')}>
+                    <a href="#" onClick={() => handleLinkClick('home')}>
                         Dev<span>Forge</span>
                     </a>
                 </div>
-                <nav className="nav-links">
-                    <a href="#" onClick={() => props.setPage('home')} className={isActive('home')}>Home</a>
-                    <a href="#" onClick={() => props.setPage('services')} className={isActive('services')}>Services</a>
-                    <a href="#" onClick={() => props.setPage('about')} className={isActive('about')}>About</a>
-                    <a href="#" onClick={() => props.setPage('contact')} className={`btn btn-primary nav-cta ${isActive('contact')}`}>
+
+                {/* --- NAVIGATION LINKS --- */}
+                {/* NEW: 
+                  - Added `mobile-open` class conditionally
+                  - Added a "Close" button inside
+                  - Links now use `handleLinkClick`
+                */}
+                <nav className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
+                    <div className="mobile-menu-header">
+                        <div className="logo-mobile">
+                            <a href="#" onClick={() => handleLinkClick('home')}>
+                                Dev<span>Forge</span>
+                            </a>
+                        </div>
+                        <button 
+                            className="mobile-menu-close" 
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            &times; {/* This is a "X" icon */}
+                        </button>
+                    </div>
+
+                    <a href="#" onClick={() => handleLinkClick('home')} className={isActive('home')}>Home</a>
+                    <a href="#" onClick={() => handleLinkClick('services')} className={isActive('services')}>Services</a>
+                    <a href="#" onClick={() => handleLinkClick('about')} className={isActive('about')}>About</a>
+                    <a href="#" onClick={() => handleLinkClick('contact')} className={`btn btn-primary nav-cta ${isActive('contact')}`}>
                         Start Project
                     </a>
                 </nav>
+
+                {/* --- NEW: HAMBURGER TOGGLE BUTTON --- */}
+                {/* This button is only visible on mobile */}
+                <button 
+                    className="mobile-menu-toggle" 
+                    onClick={() => setIsMobileMenuOpen(true)}
+                >
+                    <div className="hamburger-line"></div>
+                    <div className="hamburger-line"></div>
+                    <div className="hamburger-line"></div>
+                </button>
+
+                {/* --- NEW: OVERLAY --- */}
+                {/* This darkens the page behind the menu */}
+                {isMobileMenuOpen && (
+                    <div className="overlay" onClick={() => setIsMobileMenuOpen(false)}></div>
+                )}
+
             </div>
         </header>
     );
@@ -35,7 +83,6 @@ function Footer() {
                     <a href="#">GitHub</a>
                     <a href="#">Twitter</a>
                 </div>
-                {/* --- FIX: This is now a correct </p> tag --- */}
                 <p style={{ marginTop: '20px' }}>
                     &copy; {currentYear} DevForge. All rights reserved.
                 </p> 
@@ -90,7 +137,7 @@ function HomePage(props) {
                         </div>
                         <div className="card">
                             <h3>
-                                {/* Icon: pen-tool (FIX: Corrected d= attributes) */}
+                                {/* Icon: pen-tool */}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
                                     <path d="M18 13l-1.5-1.5"></path>
@@ -111,7 +158,7 @@ function HomePage(props) {
 function ServicesPage() {
     return (
         <div>
-            <section className="section about-section"> {/* Added 'about-section' for padding */}
+            <section className="section about-section">
                 <div className="container">
                     <h2 className="section-heading">
                         Our <span className="gradient-text">Capabilities.</span>
@@ -138,7 +185,7 @@ function ServicesPage() {
                         </div>
                         <div className="card">
                             <h3>
-                                {/* Icon: pen-tool (FIX: Corrected d= attributes) */}
+                                {/* Icon: pen-tool */}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
                                     <path d="M18 13l-1.5-1.5"></path>
