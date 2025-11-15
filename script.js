@@ -1,15 +1,11 @@
-// --- 1. Header Component ---
 function Header(props) {
-    // NEW: Add state to track if the mobile menu is open
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
-    // Determine if a link is active based on currentPage state
     const isActive = (pageName) => props.currentPage === pageName ? 'active' : '';
 
-    // NEW: Wrapper function to close menu when a link is clicked
     const handleLinkClick = (page) => {
         props.setPage(page);
-        setIsMobileMenuOpen(false); // Close menu on navigation
+        setIsMobileMenuOpen(false); 
     };
 
     return (
@@ -21,12 +17,6 @@ function Header(props) {
                     </a>
                 </div>
 
-                {/* --- NAVIGATION LINKS --- */}
-                {/* NEW: 
-                  - Added `mobile-open` class conditionally
-                  - Added a "Close" button inside
-                  - Links now use `handleLinkClick`
-                */}
                 <nav className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
                     <div className="mobile-menu-header">
                         <div className="logo-mobile">
@@ -38,7 +28,7 @@ function Header(props) {
                             className="mobile-menu-close" 
                             onClick={() => setIsMobileMenuOpen(false)}
                         >
-                            &times; {/* This is a "X" icon */}
+                            &times; 
                         </button>
                     </div>
 
@@ -50,8 +40,6 @@ function Header(props) {
                     </a>
                 </nav>
 
-                {/* --- NEW: HAMBURGER TOGGLE BUTTON --- */}
-                {/* This button is only visible on mobile */}
                 <button 
                     className="mobile-menu-toggle" 
                     onClick={() => setIsMobileMenuOpen(true)}
@@ -61,8 +49,6 @@ function Header(props) {
                     <div className="hamburger-line"></div>
                 </button>
 
-                {/* --- NEW: OVERLAY --- */}
-                {/* This darkens the page behind the menu */}
                 {isMobileMenuOpen && (
                     <div className="overlay" onClick={() => setIsMobileMenuOpen(false)}></div>
                 )}
@@ -72,7 +58,6 @@ function Header(props) {
     );
 }
 
-// --- 2. Footer Component ---
 function Footer() {
     const currentYear = new Date().getFullYear();
     return (
@@ -90,8 +75,6 @@ function Footer() {
         </footer>
     );
 }
-
-// --- 3. Page Components ---
 
 function HomePage(props) {
     return (
@@ -121,7 +104,6 @@ function HomePage(props) {
                     <div className="cards-grid">
                         <div className="card">
                             <h3>
-                                {/* Icon: layout */}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
                                 Web Platforms
                             </h3>
@@ -129,7 +111,6 @@ function HomePage(props) {
                         </div>
                         <div className="card">
                             <h3>
-                                {/* Icon: cloud */}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
                                 Cloud Solutions
                             </h3>
@@ -137,7 +118,6 @@ function HomePage(props) {
                         </div>
                         <div className="card">
                             <h3>
-                                {/* Icon: pen-tool */}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
                                     <path d="M18 13l-1.5-1.5"></path>
@@ -169,7 +149,6 @@ function ServicesPage() {
                     <div className="cards-grid">
                         <div className="card">
                             <h3>
-                                {/* Icon: layout */}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
                                 Enterprise Web
                             </h3>
@@ -177,7 +156,6 @@ function ServicesPage() {
                         </div>
                         <div className="card">
                             <h3>
-                                {/* Icon: cloud */}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
                                 Cloud & DevOps
                             </h3>
@@ -185,12 +163,12 @@ function ServicesPage() {
                         </div>
                         <div className="card">
                             <h3>
-                                {/* Icon: pen-tool */}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
                                     <path d="M18 13l-1.5-1.5"></path>
                                     <path d="M2 2l7.586 7.586"></path>
                                     <path d="M11 3.5L5.5 9 3 6.5 8.5 1z"></path>
+
                                 </svg>
                                 UI/UX & Animation
                             </h3>
@@ -198,7 +176,6 @@ function ServicesPage() {
                         </div>
                         <div className="card">
                             <h3>
-                                {/* Icon: code */}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
                                 API Development
                             </h3>
@@ -229,9 +206,9 @@ function AboutPage() {
                         
                         <h3 style={{ marginTop: '40px', color: 'var(--text-light)' }}>Our Core Values</h3>
                         <ul>
-                            <li>**Transparency:** Open communication, always.</li>
-                            <li>**Ownership:** We treat your project like it's our own.</li>
-                            <li>**Excellence:** A commitment to quality in everything we do.</li>
+                            <li>Transparency: Open communication, always.</li>
+                            <li>Ownership: We treat your project like it's our own.</li>
+                            <li>Excellence: A commitment to quality in everything we do.</li>
                         </ul>
                     </div>
                 </div>
@@ -240,21 +217,24 @@ function AboutPage() {
     );
 }
 
-// --- 4. Main App Component ---
 function App() {
-    // Use React.useState to manage the current page view
     const [currentPage, setCurrentPage] = React.useState('home');
 
     let pageContent;
     
-    // Simple state-based routing
     if (currentPage === 'home') {
         pageContent = <HomePage setPage={setCurrentPage} />;
     } else if (currentPage === 'services') {
         pageContent = <ServicesPage />;
-    } else if (currentPage === 'about') {
+    } 
+    
+    /* --- THIS IS THE FIX --- */
+    /* It is now 'about' not 'aboutG' */
+    else if (currentPage === 'about') { 
         pageContent = <AboutPage />;
-    } else if (currentPage === 'contact') {
+    } 
+    
+    else if (currentPage === 'contact') {
         pageContent = (
             <section className="section" style={{ textAlign: 'center' }}>
                 <div className="container">
@@ -272,21 +252,16 @@ function App() {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-            {/* Header component receives the function to change the state (page) */}
             <Header setPage={setCurrentPage} currentPage={currentPage} />
             
-            {/* Main content area */}
             <main className="main-content">
                 {pageContent}
             </main>
             
-            {/* Footer component */}
             <Footer />
         </div>
     );
 }
 
-
-// --- 5. Render the App ---
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
