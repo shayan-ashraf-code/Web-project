@@ -1,0 +1,438 @@
+/* --- 1. Global Theme & Variables --- */
+:root {
+    --bg-primary: #020409; /* Deep, dark background */
+    --bg-secondary: #0A0A0A; /* Slightly lighter dark for components */
+    --text-light: #E0E0E0;
+    --text-muted: #A0A0A0;
+    
+    --accent-blue: #00C4FF; /* A vibrant blue */
+    --accent-purple: #9B51E0; /* A rich purple */
+
+    /* Gradient definitions */
+    --gradient-hero: linear-gradient(90deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+    --gradient-button: linear-gradient(45deg, var(--accent-purple), var(--accent-blue));
+    
+    /* Glassmorphism Card Style */
+    --card-bg: rgba(255, 255, 255, 0.03); /* More transparent */
+    --card-border: rgba(255, 255, 255, 0.1);
+    --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Deeper shadow */
+    
+    --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --border-radius-lg: 16px;
+    --border-radius-md: 10px;
+}
+
+/* --- 2. Base & Typography --- */
+body {
+    margin: 0;
+    font-family: var(--font-family);
+    background: var(--bg-primary); 
+    color: var(--text-light);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+}
+
+.container {
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+h1, h2, h3, h4 {
+    font-weight: 700;
+    letter-spacing: -0.04em; 
+    line-height: 1.2;
+    color: var(--text-light);
+}
+
+h1 { font-size: 4rem; margin-bottom: 20px; }
+h2 { font-size: 2.8rem; margin-bottom: 15px; }
+h3 { font-size: 1.8rem; margin-bottom: 10px; }
+h4 { font-size: 1.2rem; margin-bottom: 8px; }
+
+p {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--accent-blue);
+    transition: color 0.3s ease;
+}
+a:hover {
+    color: var(--accent-purple);
+}
+
+/* Reusable Gradient Text */
+.gradient-text {
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+/* Global Button Style */
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: var(--border-radius-md);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.btn-primary {
+    background: var(--gradient-button);
+    color: var(--text-light);
+    box-shadow: 0 4px 15px rgba(0, 200, 255, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 200, 255, 0.5);
+}
+
+/* --- 3. Header / Navigation --- */
+.header {
+    background: rgba(10, 10, 10, 0.7); 
+    backdrop-filter: blur(15px); 
+    border-bottom: 1px solid var(--card-border);
+    padding: 18px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1280px; 
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.logo a {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-light);
+    letter-spacing: -0.05em;
+}
+.logo a span {
+    color: var(--accent-blue);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 40px; /* More space */
+}
+
+/* --- NAVBAR COLOR ENHANCEMENT --- */
+.nav-links a:not(.nav-cta) {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text-light); /* Base color is light */
+    opacity: 0.7; /* Fade out inactive links */
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* Underline effect */
+.nav-links a::after { 
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-hero);
+    transition: width 0.3s ease;
+}
+.nav-links a:not(.nav-cta):hover {
+    opacity: 1; /* Brighten on hover */
+}
+.nav-links a:not(.nav-cta):hover::after {
+    width: 100%;
+}
+
+/* This is the new style for the *active* link */
+.nav-links a.active:not(.nav-cta) {
+    opacity: 1;
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    font-weight: 600; /* Make it a bit bolder */
+}
+.nav-links a.active::after {
+    width: 100%; /* Show underline on active link */
+}
+
+.nav-cta {
+    padding: 10px 25px; /* Adjust button size */
+}
+
+
+/* --- 4. Main Content & Sections --- */
+.main-content {
+    flex-grow: 1;
+}
+
+.section { /* Generic section padding */
+    padding: 100px 0;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 3.5rem;
+}
+.section-subheading {
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: -30px auto 60px auto;
+}
+
+/* --- 5. Hero Section --- */
+.hero-section {
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(0, 196, 255, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(155, 81, 224, 0.1) 0%, transparent 40%),
+        var(--bg-primary); 
+    
+    /* --- "MAIN DEV" FIX --- */
+    min-height: 80vh; /* Set a minimum height */
+    padding: 40px 0; /* Remove fixed top/bottom padding */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    text-align: center; /* Center text inside */
+}
+
+.hero-section h1 {
+    font-size: 5.5rem;
+    line-height: 1;
+    margin-bottom: 25px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-section .hero-subheading {
+    font-size: 1.4rem;
+    max-width: 700px;
+    margin: 0 auto 50px auto;
+}
+
+/* --- 6. Glass Cards (Services/Features) --- */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    padding-bottom: 40px;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(10px); 
+    border-radius: var(--border-radius-lg);
+    padding: 40px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden; 
+}
+
+.card::before { 
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-hero);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: -1;
+    filter: blur(50px);
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: var(--card-shadow);
+    border-color: var(--accent-blue);
+}
+.card:hover::before {
+    opacity: 0.1; /* Show subtle glow */
+}
+
+.card h3 {
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.card h3 svg {
+    color: var(--accent-blue);
+    font-size: 1.8rem;
+}
+.card p {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+/* --- 7. About Page Specifics --- */
+.about-section {
+    padding-top: 80px;
+}
+.about-content {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(10px);
+    padding: 60px;
+    border-radius: var(--border-radius-lg);
+    max-width: 1000px;
+    margin: 40px auto;
+}
+.about-content h2 {
+    color: var(--text-light);
+    margin-bottom: 25px;
+}
+.about-content p {
+    font-size: 1.15rem;
+    margin-bottom: 25px;
+}
+.about-content ul {
+    list-style: none;
+    padding: 0;
+}
+.about-content li {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 30px;
+}
+.about-content li::before {
+    content: '→'; /* Custom bullet point */
+    position: absolute;
+    left: 0;
+    color: var(--accent-blue);
+    font-weight: 700;
+}
+
+
+/* --- 8. Footer --- */
+.footer {
+    padding: 60px 0;
+    text-align: center;
+    border-top: 1px solid var(--card-border);
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+.footer-links {
+    margin-bottom: 25px;
+}
+.footer-links a {
+    color: var(--text-muted);
+    margin: 0 20px;
+    font-size: 1.05rem;
+}
+.footer-links a:hover {
+    color: var(--accent-blue);
+}
+
+
+/* --- 9. MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+    
+    /* --- Responsive Header --- */
+    .header-container {
+        flex-wrap: wrap; /* This will wrap links below logo if needed */
+        justify-content: space-between;
+        gap: 15px;
+        padding: 20px 25px;
+    }
+    .logo {
+        flex-shrink: 0; /* Don't let logo shrink */
+    }
+    .nav-links {
+        gap: 20px; /* Tighter links */
+        flex-grow: 1; /* Allow links to take space */
+        width: 100%; /* Make it full width *if* it wraps */
+        justify-content: center;
+        flex-wrap: wrap; /* Allow links to wrap */
+    }
+    .nav-links a {
+        font-size: 1rem;
+    }
+    .nav-cta {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+
+    /* --- Responsive Typography --- */
+    h1 { font-size: 2.8rem; } /* Smaller */
+    h2 { font-size: 2.2rem; }
+    .section-heading { font-size: 2.5rem; } /* Smaller */
+
+    /* --- Responsive Hero --- */
+    .hero-section {
+        padding: 80px 20px; /* Adjust padding */
+        min-height: 70vh;
+    }
+    .hero-section h1 {
+        font-size: 2.8rem; /* Drastically smaller h1 */
+        letter-spacing: -0.03em;
+    }
+    .hero-section .hero-subheading {
+        font-size: 1.05rem; /* Smaller subheading */
+    }
+
+    /* --- Responsive Layout --- */
+    .container {
+        padding: 0 20px;
+    }
+    .section {
+        padding: 80px 0;
+    }
+    .section-subheading {
+        margin: -20px auto 40px auto;
+        font-size: 1rem;
+    }
+
+    /* --- Responsive Cards --- */
+    .cards-grid {
+        grid-template-columns: 1fr; /* Stack cards on mobile */
+        gap: 20px;
+    }
+    .card {
+        padding: 30px;
+    }
+    .about-content {
+        padding: 40px 25px;
+    }
+
+    /* --- Responsive Footer --- */
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+}
